@@ -4,7 +4,8 @@
 const findInput = document.querySelector(".find-input")
 const replaceInput = document.querySelector(".replace-input")
 const replaceAllButton = document.querySelector(".replace-all-button")
-
+const replaceOneButton = document.querySelector(".replace-one-button")
+let result = document.querySelector("#result")
 // The following variable holds your OUTER ARRAY of row elements.
 // Later you will need an OUTER LOOP to loop over the individual elements within
 // this array.
@@ -22,7 +23,56 @@ function getCellElements (currentRowElement) {
 
 // YOUR CODE GOES HERE
 
+replaceAllButton.addEventListener("click", function () { 
+    let find = findInput.value  
+    let replace = replaceInput.value
+    let counter = 0
+    // console.log(find)
+    // console.log(replace)
+    for (let i = 0; i < rowElements.length; i++) {
+        const element = rowElements[i];
+        let getElement = getCellElements(element)
+        //console.log(getElement)
+        for (let j = 0; j < getElement.length; j++) {
+            const eachElement = getElement[j].innerHTML;
+            //console.log(eachElement)
+            if(eachElement.includes(find)){
+                console.log(eachElement)
+                console.log(find)
+                getElement[j].innerHTML = "<mark>"+ eachElement.replace(find,replace)+"</mark>"
+                counter += 1
+                result.innerHTML =  "<mark>You have changed "+ counter +  " text(s) </mark>"
+            }
+        }
+    }
+}) 
 
+
+replaceOneButton.addEventListener("click", function () { 
+    let find = findInput.value  
+    let replace = replaceInput.value
+    let counter = 0
+    // console.log(find)
+    // console.log(replace)
+    for (let i = 0; i < rowElements.length; i++) {
+        const element = rowElements[i];
+        let getElement = getCellElements(element)
+        //console.log(getElement)
+        for (let j = 0; j < getElement.length; j++) {
+            const eachElement = getElement[j].innerHTML;
+            //console.log(eachElement)
+            if(eachElement.includes(find)){
+                if( counter < 1){
+                    console.log(eachElement)
+                    console.log(find)
+                    getElement[j].innerHTML = "<mark>"+ eachElement.replace(find,replace)+"</mark>"
+                    counter += 1
+                    result.innerHTML =  "<mark>You have changed "+ counter +  " text(s) </mark>"
+                }
+            }
+        }
+    }
+}) 
 // One last thing: dedicate very careful attention to using variables and
 // naming them accurately.
 // And when you change the value you are assigning to a variable, don't
